@@ -10,11 +10,21 @@ Cinematic Loading + Click To Enter
 BOOT
 ==================================================*/
 
-window.addEventListener(
-    "load",
-    startUniverse
-);
+if(document.readyState === "loading"){
 
+    document.addEventListener(
+        "DOMContentLoaded",
+        startUniverse,
+        {
+            once:true
+        }
+    );
+
+}else{
+
+    startUniverse();
+
+}
 /*==================================================
 START
 ==================================================*/
