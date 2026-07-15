@@ -9,7 +9,7 @@ GALLERY DATA
 const GalleryData = [
 
     {
-        image: "assets/gallery/photo-01.webp",
+        image: "",
         caption: "A little moment from our beautiful story",
 
         rotation: null,
@@ -21,7 +21,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-02.webp",
+        image: "",
         caption: "One of my favorite memories with you",
 
         rotation: null,
@@ -33,7 +33,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-03.webp",
+        image: "",
         caption: "A moment I never want to forget",
 
         rotation: null,
@@ -45,7 +45,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-04.webp",
+        image: "",
         caption: "Just you, me, and our little world",
 
         rotation: null,
@@ -57,7 +57,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-05.webp",
+        image: "",
         caption: "Another beautiful piece of us",
 
         rotation: null,
@@ -69,7 +69,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-06.webp",
+        image: "",
         caption: "A memory that always makes me smile",
 
         rotation: null,
@@ -81,7 +81,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-07.webp",
+        image: "",
         caption: "One more page from our story",
 
         rotation: null,
@@ -93,7 +93,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-08.webp",
+        image: "",
         caption: "My favorite moments are the ones with you",
 
         rotation: null,
@@ -105,7 +105,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-09.webp",
+        image: "",
         caption: "A little memory waiting for us",
 
         rotation: null,
@@ -117,7 +117,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-10.webp",
+        image: "",
         caption: "Another piece of our beautiful world",
 
         rotation: null,
@@ -129,7 +129,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-11.webp",
+        image: "",
         caption: "A moment to keep forever",
 
         rotation: null,
@@ -141,7 +141,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-12.webp",
+        image: "",
         caption: "One more reason to smile",
 
         rotation: null,
@@ -153,7 +153,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-13.webp",
+        image: "",
         caption: "A tiny frame from our story",
 
         rotation: null,
@@ -165,7 +165,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-14.webp",
+        image: "",
         caption: "A beautiful moment under our moon",
 
         rotation: null,
@@ -177,7 +177,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-15.webp",
+        image: "",
         caption: "Something lovely to remember",
 
         rotation: null,
@@ -189,7 +189,7 @@ const GalleryData = [
     },
 
     {
-        image: "assets/gallery/photo-16.webp",
+        image: "",
         caption: "Another favorite memory with you",
 
         rotation: null,

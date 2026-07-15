@@ -100,20 +100,14 @@ const WorldLoader = {
                 "assets/world/moon.webp"
         },
 
-        {
-            type:
-                "image",
-
-            src:
-                "assets/world/tree.webp"
-        },
+        
 
         {
-            type:
-                "image",
+             type:
+                 "image",
 
-            src:
-                "assets/world/swing.webp"
+             src:
+                 "assets/world/girl-swing.webp"
         },
 
         {
