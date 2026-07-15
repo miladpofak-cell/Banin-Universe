@@ -73,130 +73,113 @@ const WorldLoader = {
 
     getAssetList(){
 
-        const assets = [
+    /*
+        Only assets required for the opening world
+        are loaded before entry.
 
-            {
-                type:"image",
-                src:"assets/images/background.webp"
-            },
+        Story pages, encrypted Gallery photos,
+        panel backgrounds and music will load
+        only when they are actually needed.
+    */
 
-            {
-                type:"image",
-                src:"assets/world/moon.webp"
-            },
+    const assets = [
 
-            {
-                type:"image",
-                src:"assets/world/tree.webp"
-            },
+        {
+            type:
+                "image",
 
-            {
-                type:"image",
-                src:"assets/world/swing.webp"
-            },
+            src:
+                "assets/images/background.webp"
+        },
 
-            {
-                type:"image",
-                src:"assets/world/lantern.webp"
-            },
+        {
+            type:
+                "image",
 
-            {
-                type:"image",
-                src:"assets/world/story-book.webp"
-            },
+            src:
+                "assets/world/moon.webp"
+        },
 
-            {
-                type:"image",
-                src:"assets/world/gallery-object.webp"
-            },
+        {
+            type:
+                "image",
 
-            {
-                type:"image",
-                src:"assets/world/gift.webp"
-            },
+            src:
+                "assets/world/tree.webp"
+        },
 
-            {
-                type:"image",
-                src:"assets/world/gift-panel-bg.webp"
-            },
+        {
+            type:
+                "image",
 
-            {
-                type:"image",
-                src:"assets/world/music-object.webp"
-            },
+            src:
+                "assets/world/swing.webp"
+        },
 
-            {
-                type:"image",
-                src:"assets/world/banin-universe-logo.webp"
-            },
+        {
+            type:
+                "image",
 
-            {
-                type:"image",
-                src:"assets/world/milad-signature.webp"
-            },
+            src:
+                "assets/world/lantern.webp"
+        },
 
-            {
-                type:"image",
-                src:"assets/story/intro/story-book-cover.webp"
-            },
+        {
+            type:
+                "image",
 
-            {
-                type:"audio",
-                src:"assets/audio/music.mp3"
-            }
+            src:
+                "assets/world/story-book.webp"
+        },
 
-        ];
+        {
+            type:
+                "image",
 
-        for(
-            let page = 1;
-            page <= 22;
-            page += 1
-        ){
+            src:
+                "assets/world/gallery-object.webp"
+        },
 
-            const padded =
-                String(page).padStart(
-                    2,
-                    "0"
-                );
+        {
+            type:
+                "image",
 
-            assets.push({
-                type:"image",
-                src:
-                    `assets/story/backgrounds/page-${padded}.webp`
-            });
+            src:
+                "assets/world/gift.webp"
+        },
 
+        {
+            type:
+                "image",
+
+            src:
+                "assets/world/music-object.webp"
+        },
+
+        {
+            type:
+                "image",
+
+            src:
+                "assets/world/banin-universe-logo.webp"
+        },
+
+        {
+            type:
+                "image",
+
+            src:
+                "assets/world/milad-signature.webp"
         }
 
-        for(
-            let photo = 1;
-            photo <= 16;
-            photo += 1
-        ){
+    ];
 
-            const padded =
-                String(photo).padStart(
-                    2,
-                    "0"
-                );
 
-            assets.push({
-                type:"image",
-                src:
-                    `assets/gallery/photo-${padded}.webp`
-            });
+    return this.removeDuplicates(
+        assets
+    );
 
-        }
-
-        assets.push({
-            type:"image",
-            src:"assets/gallery/secret-memory.webp"
-        });
-
-        return this.removeDuplicates(
-            assets
-        );
-
-    },
+},
 
     removeDuplicates(assetList){
 
