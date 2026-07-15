@@ -1,0 +1,2467 @@
+/*==================================================
+BANIN UNIVERSE
+FONTS
+==================================================*/
+
+@font-face {
+    font-family: "BaninDream";
+    src: url("assets/fonts/banin-dream.woff2") format("woff2");
+    font-weight: 400 900;
+    font-style: normal;
+    font-display: swap;
+}
+/*==================================================
+🌙 BANIN UNIVERSE
+STYLE.CSS
+Version : 1.0.0
+Status : Production
+==================================================*/
+
+
+/*==================================================
+01 - RESET
+==================================================*/
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+    -webkit-text-size-adjust:100%;
+
+}
+
+body{
+
+    overflow:hidden;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+/*==================================================
+02 - ROOT VARIABLES
+==================================================*/
+
+:root{
+
+    /* World */
+
+    --world-width:5120px;
+    --world-height:2880px;
+
+    /* Colors */
+
+    --color-night:#02040d;
+
+    --color-white:#ffffff;
+
+    --color-moon:#f6f3e8;
+
+    --color-blue:#6aa8ff;
+
+    --color-purple:#8468ff;
+
+    --color-pink:#ffb7d9;
+
+    /* Glow */
+
+    --moon-glow:0 0 120px rgba(255,255,255,.45);
+
+    --lantern-glow:0 0 60px rgba(255,220,120,.5);
+
+    /* Animation */
+
+    --transition-fast:.25s;
+
+    --transition:.4s;
+
+    --transition-slow:.8s;
+
+    /* Layers */
+
+    --z-sky:1;
+
+    --z-background:5;
+
+    --z-moon:10;
+
+    --z-world:20;
+
+    --z-particles:30;
+
+    --z-light:40;
+
+    --z-ui:100;
+
+    --z-modal:500;
+
+    --z-cutscene:1000;
+
+}
+
+
+/*==================================================
+03 - HTML / BODY
+==================================================*/
+
+html,
+body{
+
+    width:100%;
+
+    height:100%;
+
+    overflow:hidden;
+
+    background:var(--color-night);
+
+    font-family:"Vazirmatn",sans-serif;
+
+    color:white;
+
+}
+
+
+/*==================================================
+04 - APP
+==================================================*/
+
+#app{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    background:#02040d;
+
+}
+
+
+/*==================================================
+05 - CAMERA
+==================================================*/
+
+#camera{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    isolation:isolate;
+
+    will-change:transform;
+
+    transform:translate3d(0,0,0);
+
+}
+/*==================================================
+06 - SKY
+==================================================*/
+
+#dreamSky{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:var(--z-sky);
+
+    pointer-events:none;
+
+}
+
+#starCanvas{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+}
+
+
+/*==================================================
+07 - BACKGROUND
+==================================================*/
+
+#backgroundLayer{
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    z-index:var(--z-background);
+
+    overflow:hidden;
+
+}
+
+#backgroundImage{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:100%;
+
+    height:100%;
+
+    transform:translate(-50%,-50%);
+
+    object-fit:cover;
+
+    object-position:center center;
+
+    user-select:none;
+
+    pointer-events:none;
+
+    image-rendering:auto;
+
+}
+
+
+/*==================================================
+08 - MOON
+==================================================*/
+
+#moonLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-moon);
+
+    pointer-events:none;
+
+}
+
+#moon{
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    left:10%;
+
+    top:7%;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        #fffef9 0%,
+        #f7f2dc 60%,
+        #ece4c5 100%
+    );
+
+    box-shadow:var(--moon-glow);
+
+    will-change:transform,opacity,filter;
+
+}
+
+#moonGlow{
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    left:calc(10% - 125px);
+
+    top:calc(7% - 125px);
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        rgba(255,255,255,.20),
+        transparent 70%
+    );
+
+    filter:blur(30px);
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+09 - WORLD
+==================================================*/
+
+#worldLayer{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:var(--world-width);
+
+    height:var(--world-height);
+
+    transform:translate(-50%,-50%);
+
+    z-index:var(--z-world);
+
+    will-change:transform;
+
+}
+
+
+/*==================================================
+10 - WORLD CONTAINERS
+==================================================*/
+
+#riverContainer,
+#treeContainer,
+#girlContainer,
+#swingContainer,
+#lanternContainer,
+#storyBookContainer,
+#diaryContainer,
+#galleryContainer,
+#giftContainer,
+#musicContainer{
+
+    position:absolute;
+
+    will-change:transform;
+
+    transform-origin:center center;
+
+}
+
+
+/*==================================================
+11 - DEFAULT OBJECT STATE
+==================================================*/
+
+#riverContainer,
+#treeContainer,
+#girlContainer,
+#swingContainer,
+#lanternContainer{
+
+    pointer-events:none;
+
+}
+
+#storyBookContainer,
+#galleryContainer,
+#diaryContainer,
+#giftContainer,
+#musicContainer{
+
+    cursor:pointer;
+
+    transition:
+        transform .35s ease,
+        filter .35s ease,
+        opacity .35s ease;
+
+}
+
+#storyBookContainer:hover,
+#galleryContainer:hover,
+#diaryContainer:hover,
+#giftContainer:hover,
+#musicContainer:hover{
+
+    transform:scale(1.05);
+
+    filter:brightness(1.15);
+
+}
+/*==================================================
+12 - PARTICLE LAYER
+==================================================*/
+
+#particleLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-particles);
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+}
+
+#mistLayer,
+#fireflyLayer,
+#petalLayer,
+#butterflyLayer,
+#magicDustLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+}
+
+/*==================================================
+13 - MIST
+==================================================*/
+
+#mistLayer{
+
+    opacity:.12;
+
+    filter:blur(18px);
+
+    will-change:transform,opacity;
+
+}
+
+/*==================================================
+14 - FIREFLIES
+==================================================*/
+
+#fireflyLayer{
+
+    will-change:transform;
+
+}
+
+.firefly{
+
+    position:absolute;
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:#fff8b0;
+
+    box-shadow:
+        0 0 8px rgba(255,255,180,.8),
+        0 0 18px rgba(255,255,150,.45);
+
+    pointer-events:none;
+
+}
+
+/*==================================================
+15 - PETALS
+==================================================*/
+
+#petalLayer{
+
+    will-change:transform;
+
+}
+
+.petal{
+
+    position:absolute;
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50% 50% 50% 0;
+
+    background:#ffc8e8;
+
+    opacity:.85;
+
+    transform:rotate(45deg);
+
+}
+
+/*==================================================
+16 - BUTTERFLIES
+==================================================*/
+
+#butterflyLayer{
+
+    will-change:transform;
+
+}
+
+.butterfly{
+
+    position:absolute;
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    opacity:.95;
+
+    filter:drop-shadow(0 0 10px rgba(255,255,255,.35));
+
+}
+
+/*==================================================
+17 - MAGIC DUST
+==================================================*/
+
+#magicDustLayer{
+
+    will-change:transform;
+
+}
+
+.magicDust{
+
+    position:absolute;
+
+    width:3px;
+
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.75;
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.7);
+
+}
+
+/*==================================================
+18 - LIGHTING
+==================================================*/
+
+#lightLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-light);
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+/*==================================================
+19 - AMBIENT LIGHT
+==================================================*/
+
+#ambientLight{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,255,255,.04),
+            transparent 70%
+        );
+
+    mix-blend-mode:screen;
+
+    opacity:.7;
+
+}
+
+/*==================================================
+20 - LANTERN GLOW
+==================================================*/
+
+#lanternGlow{
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,220,140,.35),
+
+            transparent 75%
+
+        );
+
+    filter:blur(18px);
+
+    opacity:0;
+
+    transition:opacity .4s ease;
+
+}
+
+/*==================================================
+21 - LIGHT HELPERS
+==================================================*/
+
+.glow{
+
+    filter:drop-shadow(0 0 20px rgba(255,255,255,.5));
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.fade-in{
+
+    animation:fadeIn .5s ease forwards;
+
+}
+
+.fade-out{
+
+    animation:fadeOut .5s ease forwards;
+
+}
+/*==================================================
+22 - UI LAYER
+==================================================*/
+
+#uiLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-ui);
+
+    pointer-events:none;
+
+}
+
+/*==================================================
+23 - LOGO
+==================================================*/
+
+#logoContainer{
+
+    position:absolute;
+
+    top:30px;
+
+    left:40px;
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+/*==================================================
+24 - MAIN MENU
+==================================================*/
+
+#mainMenu{
+
+    position:absolute;
+
+    top:50%;
+
+    left:40px;
+
+    transform:translateY(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    pointer-events:auto;
+
+}
+
+/*==================================================
+25 - MENU BUTTONS
+==================================================*/
+
+#mainMenu button{
+
+    width:220px;
+
+    padding:14px 22px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    color:#ffffff;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
+
+    -webkit-backdrop-filter:blur(10px);
+
+    transition:
+
+        transform .30s ease,
+
+        background .30s ease,
+
+        box-shadow .30s ease,
+
+        color .30s ease;
+
+}
+
+/*==================================================
+26 - BUTTON HOVER
+==================================================*/
+
+#mainMenu button:hover{
+
+    transform:translateX(10px);
+
+    background:rgba(255,255,255,.16);
+
+    box-shadow:
+
+        0 0 25px rgba(255,255,255,.18);
+
+}
+
+/*==================================================
+27 - BUTTON ACTIVE
+==================================================*/
+
+#mainMenu button:active{
+
+    transform:translateX(6px) scale(.97);
+
+}
+
+/*==================================================
+28 - BUTTON FOCUS
+==================================================*/
+
+#mainMenu button:focus-visible{
+
+    outline:2px solid rgba(255,255,255,.6);
+
+    outline-offset:4px;
+
+}
+
+/*==================================================
+29 - BUTTON ICON SUPPORT
+==================================================*/
+
+#mainMenu button i{
+
+    margin-right:10px;
+
+}
+
+/*==================================================
+30 - SETTINGS BUTTON
+==================================================*/
+
+#btnSettings{
+
+    margin-top:18px;
+
+}
+
+/*==================================================
+31 - UI HELPERS
+==================================================*/
+
+.is-active{
+
+    background:rgba(255,255,255,.22)!important;
+
+}
+
+.is-disabled{
+
+    pointer-events:none;
+
+    opacity:.4;
+
+}
+
+.is-hidden{
+
+    display:none!important;
+
+}
+/*==================================================
+32 - MODAL LAYER
+==================================================*/
+
+#modalLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-modal);
+
+    pointer-events:none;
+
+}
+
+/*==================================================
+33 - GALLERY LOCK
+==================================================*/
+
+#galleryLockModal{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(16px);
+
+    -webkit-backdrop-filter:blur(16px);
+
+    pointer-events:auto;
+
+}
+
+.lockBox{
+
+    width:420px;
+
+    padding:40px;
+
+    border-radius:22px;
+
+    background:rgba(18,20,32,.92);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+
+}
+
+.lockBox h2{
+
+    text-align:center;
+
+    margin-bottom:24px;
+
+    font-size:28px;
+
+}
+
+.lockBox input{
+
+    width:100%;
+
+    padding:14px 18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    outline:none;
+
+    margin-bottom:18px;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+.lockBox button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    background:#5f7cff;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.25s;
+
+}
+
+.lockBox button:hover{
+
+    transform:translateY(-2px);
+
+    filter:brightness(1.1);
+
+}
+
+#lockError{
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:#ff8d8d;
+
+    min-height:20px;
+
+}
+
+/*==================================================
+34 - GALLERY GRID
+==================================================*/
+
+#galleryGrid{
+
+    position:absolute;
+
+    inset:60px;
+
+    overflow:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+
+    gap:24px;
+
+    padding:30px;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    pointer-events:auto;
+
+}
+
+.galleryItem{
+
+    position:relative;
+
+    aspect-ratio:1/1;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+.galleryItem:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 35px rgba(0,0,0,.35);
+
+}
+
+.galleryItem img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/*==================================================
+35 - IMAGE VIEWER
+==================================================*/
+
+#galleryViewer{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.88);
+
+    backdrop-filter:blur(18px);
+
+    pointer-events:auto;
+
+}
+
+#viewerImage{
+
+    max-width:90%;
+
+    max-height:88%;
+
+    object-fit:contain;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.45);
+
+    will-change:transform;
+
+}
+
+#closeViewer{
+
+    position:absolute;
+
+    top:28px;
+
+    right:34px;
+
+    width:52px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:22px;
+
+    background:rgba(255,255,255,.08);
+
+    transition:.25s;
+
+}
+
+#closeViewer:hover{
+
+    transform:rotate(90deg);
+
+    background:rgba(255,255,255,.18);
+
+}
+
+/*==================================================
+36 - FUTURE MODALS
+==================================================*/
+
+.storyModal,
+.diaryModal,
+.giftModal,
+.musicModal{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(16px);
+
+}
+
+/*==================================================
+37 - MODAL WINDOW
+==================================================*/
+
+.modalWindow{
+
+    width:min(1200px,90vw);
+
+    height:min(760px,88vh);
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    background:#111827;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.45);
+
+}
+/*==================================================
+38 - GLOBAL ANIMATIONS
+==================================================*/
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes fadeOut{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes moonPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        filter:brightness(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.03);
+
+        filter:brightness(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        filter:brightness(1);
+
+    }
+
+}
+
+@keyframes lanternGlow{
+
+    0%{
+
+        opacity:.55;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.55;
+
+    }
+
+}
+
+@keyframes fireflyBlink{
+
+    0%{
+
+        opacity:.2;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.2;
+
+    }
+
+}
+
+@keyframes mistMove{
+
+    from{
+
+        transform:translateX(0);
+
+    }
+
+    to{
+
+        transform:translateX(-120px);
+
+    }
+
+}
+
+@keyframes butterflyFloat{
+
+    0%{
+
+        transform:translateY(0) rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:translateY(-18px) rotate(6deg);
+
+    }
+
+    100%{
+
+        transform:translateY(0) rotate(0deg);
+
+    }
+
+}
+
+@keyframes petalFall{
+
+    from{
+
+        transform:translateY(-80px) rotate(0deg);
+
+    }
+
+    to{
+
+        transform:translateY(100vh) rotate(360deg);
+
+    }
+
+}
+
+
+/*==================================================
+39 - ANIMATION HELPERS
+==================================================*/
+
+.float{
+
+    animation:float 4s ease-in-out infinite;
+
+}
+
+.fade{
+
+    animation:fadeIn .5s ease;
+
+}
+
+.pulse{
+
+    animation:moonPulse 4s ease-in-out infinite;
+
+}
+
+.glow-animation{
+
+    animation:lanternGlow 3s ease-in-out infinite;
+
+}
+
+.firefly-animation{
+
+    animation:fireflyBlink 2s ease-in-out infinite;
+
+}
+
+.butterfly-animation{
+
+    animation:butterflyFloat 7s ease-in-out infinite;
+
+}
+
+.mist-animation{
+
+    animation:mistMove 40s linear infinite alternate;
+
+}
+
+.petal-animation{
+
+    animation:petalFall 14s linear infinite;
+
+}
+
+
+/*==================================================
+40 - UTILITIES
+==================================================*/
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.invisible{
+
+    opacity:0 !important;
+
+}
+
+.visible{
+
+    opacity:1 !important;
+
+}
+
+.no-select{
+
+    user-select:none;
+
+}
+
+.no-pointer{
+
+    pointer-events:none;
+
+}
+
+.pointer{
+
+    cursor:pointer;
+
+}
+
+.full{
+
+    width:100%;
+
+    height:100%;
+
+}
+
+
+/*==================================================
+41 - SCROLLBAR
+==================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:rgba(255,255,255,.05);
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.18);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:rgba(255,255,255,.28);
+
+}
+
+
+/*==================================================
+42 - TEXT SELECTION
+==================================================*/
+
+::selection{
+
+    background:rgba(140,120,255,.35);
+
+    color:white;
+
+}
+
+
+/*==================================================
+43 - RESPONSIVE
+==================================================*/
+
+@media (max-width:1200px){
+
+    #mainMenu{
+
+        left:24px;
+
+    }
+
+    #mainMenu button{
+
+        width:190px;
+
+        font-size:15px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    #mainMenu{
+
+        top:auto;
+
+        bottom:30px;
+
+        left:50%;
+
+        transform:translateX(-50%);
+
+        flex-direction:row;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+    #mainMenu button{
+
+        width:160px;
+
+        font-size:14px;
+
+    }
+
+    #logoContainer{
+
+        left:20px;
+
+        top:20px;
+
+    }
+
+}
+
+@media (max-width:500px){
+
+    #mainMenu button{
+
+        width:140px;
+
+        padding:12px;
+
+        font-size:13px;
+
+    }
+
+}
+
+
+/*==================================================
+44 - PERFORMANCE
+==================================================*/
+
+#camera,
+#worldLayer,
+#backgroundLayer,
+#moon,
+#particleLayer{
+
+    will-change:transform,opacity;
+
+    transform:translateZ(0);
+
+    backface-visibility:hidden;
+
+}
+/*==================================================
+45 - REDUCED MOTION
+==================================================*/
+
+@media (prefers-reduced-motion: reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+
+/*==================================================
+46 - IMAGE RULES
+==================================================*/
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    user-drag:none;
+
+    pointer-events:none;
+
+    image-rendering:auto;
+
+}
+
+
+/*==================================================
+47 - BUTTON RESET
+==================================================*/
+
+button{
+
+    font-family:inherit;
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+
+}
+
+
+/*==================================================
+48 - INPUT RESET
+==================================================*/
+
+input,
+textarea{
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+
+/*==================================================
+49 - LINKS
+==================================================*/
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+/*==================================================
+50 - FUTURE OBJECT PLACEHOLDERS
+==================================================*/
+
+.object{
+
+    position:absolute;
+
+    transform-origin:center center;
+
+    will-change:transform;
+
+}
+
+.interactive{
+
+    cursor:pointer;
+
+    transition:
+
+        transform .35s ease,
+
+        filter .35s ease,
+
+        opacity .35s ease;
+
+}
+
+.interactive:hover{
+
+    transform:scale(1.05);
+
+    filter:brightness(1.08);
+
+}
+
+
+/*==================================================
+51 - DEBUG MODE
+==================================================*/
+
+.debug-border{
+
+    outline:1px dashed rgba(255,0,0,.35);
+
+}
+
+.debug-hide{
+
+    opacity:.25;
+
+}
+
+
+/*==================================================
+52 - PRINT
+==================================================*/
+
+@media print{
+
+    body{
+
+        display:none;
+
+    }
+
+}
+
+
+/*==================================================
+53 - FINAL SAFETY
+==================================================*/
+
+canvas{
+
+    display:block;
+
+}
+
+audio{
+
+    display:none;
+
+}
+
+
+/*==================================================
+54 - END OF FILE
+==================================================*/
+
+/*
+
+🌙==================================================
+
+BANIN UNIVERSE
+
+STYLE.CSS
+
+Version : 1.0.0
+
+Status : PRODUCTION
+
+Architecture : LOCKED
+
+Created with ❤️
+
+==================================================🌙
+
+*/
+/*==================================================
+HIDE OLD LEFT MENU
+==================================================*/
+
+#mainMenu{
+    display:none !important;
+    pointer-events:none !important;
+}
+/*==================================================
+HIDE STORY BOOK COVER TITLE TEXT
+==================================================*/
+
+.story-book-title-v2{
+    display:none !important;
+}
+/*==================================================
+BANIN UNIVERSE
+CINEMATIC LOADING + ENTER SCREEN
+==================================================*/
+
+@keyframes universeLoadingStar{
+
+    0%,
+    100%{
+        opacity:.22;
+        transform:scale(.65) rotate(0deg);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.16) rotate(90deg);
+    }
+
+}
+
+@keyframes universeMoonAura{
+
+    0%,
+    100%{
+        opacity:.38;
+        transform:translate(-50%,-50%) scale(.92);
+    }
+
+    50%{
+        opacity:.78;
+        transform:translate(-50%,-50%) scale(1.08);
+    }
+
+}
+
+@keyframes universeMoonFloat{
+
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+@keyframes universeLoadingShimmer{
+
+    from{
+        transform:translateX(-140%) skewX(-18deg);
+    }
+
+    to{
+        transform:translateX(240%) skewX(-18deg);
+    }
+
+}
+
+@keyframes universeEnterPulse{
+
+    0%,
+    100%{
+        box-shadow:
+            0 13px 34px rgba(0,0,0,.40),
+            0 0 20px rgba(255,205,128,.20),
+            0 0 32px rgba(177,87,255,.28);
+    }
+
+    50%{
+        box-shadow:
+            0 16px 38px rgba(0,0,0,.46),
+            0 0 32px rgba(255,214,145,.40),
+            0 0 52px rgba(187,93,255,.46);
+    }
+
+}
+
+#loadingScreen{
+
+    --loading-progress:0%;
+
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 38%,
+            rgba(91,43,151,.34),
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 50% 74%,
+            rgba(59,33,113,.22),
+            transparent 44%
+        ),
+        linear-gradient(
+            155deg,
+            #03020c,
+            #0e0821 48%,
+            #05030f
+        );
+
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transition:
+        opacity .95s ease,
+        visibility .95s ease;
+
+    z-index:3000000;
+}
+
+#loadingScreen::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,244,211,.62) 0 1px,
+            transparent 1.8px
+        );
+
+    background-size:61px 61px;
+    background-position:17px 22px;
+
+    opacity:.13;
+    pointer-events:none;
+
+}
+
+#loadingScreen.loading-entering{
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+}
+
+.universe-loader{
+
+    position:relative;
+
+    width:min(570px, calc(100vw - 40px));
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:42px 38px 36px;
+
+    text-align:center;
+
+    z-index:5;
+}
+
+.loading-stars{
+
+    position:absolute;
+    inset:-90px;
+
+    pointer-events:none;
+}
+
+.loading-stars span{
+
+    position:absolute;
+
+    left:var(--x);
+    top:var(--y);
+
+    color:rgba(255,232,172,.96);
+
+    font-family:Georgia, serif;
+    font-size:16px;
+
+    text-shadow:
+        0 0 8px rgba(255,225,154,.92),
+        0 0 18px rgba(189,99,255,.60);
+
+    animation:
+        universeLoadingStar
+        3.2s
+        ease-in-out
+        var(--delay)
+        infinite;
+}
+
+.loading-moon-wrap{
+
+    position:relative;
+
+    width:210px;
+    height:210px;
+
+    margin-bottom:25px;
+
+    animation:
+        universeMoonFloat
+        5s
+        ease-in-out
+        infinite;
+}
+
+.loading-moon-aura{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:270px;
+    height:270px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,239,190,.28),
+            rgba(180,111,255,.17) 38%,
+            rgba(106,65,201,.07) 61%,
+            transparent 73%
+        );
+
+    filter:blur(17px);
+
+    animation:
+        universeMoonAura
+        4s
+        ease-in-out
+        infinite;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.loading-moon{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:174px;
+    height:174px;
+
+    transform:translate(-50%,-50%);
+
+    overflow:hidden;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 40% 34%,
+            rgba(113,91,137,.34),
+            rgba(29,18,48,.82) 66%,
+            rgba(12,8,26,.96)
+        );
+
+    border:
+        1px solid rgba(255,229,173,.23);
+
+    box-shadow:
+        inset 0 0 28px rgba(0,0,0,.48),
+        0 0 26px rgba(172,92,255,.24);
+
+    z-index:2;
+}
+
+.loading-moon-fill{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:var(--loading-progress);
+    height:100%;
+
+    overflow:hidden;
+
+    transition:
+        width .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.loading-moon-fill::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:174px;
+    height:174px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 38% 31%,
+            #fffbe3 0%,
+            #fff2bd 38%,
+            #e6c883 72%,
+            #a77b4d 100%
+        );
+
+    box-shadow:
+        inset -14px -14px 26px rgba(112,71,48,.20),
+        inset 8px 8px 18px rgba(255,255,255,.26);
+}
+
+.loading-moon-shine{
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 36% 30%,
+            rgba(255,255,255,.26),
+            transparent 28%
+        );
+
+    pointer-events:none;
+    z-index:4;
+}
+
+.loading-title{
+
+    position:relative;
+
+    margin:0 0 13px;
+
+    font-family:
+        "BaninDream",
+        Georgia,
+        serif;
+
+    font-size:clamp(37px, 6vw, 55px);
+    line-height:1.1;
+    font-weight:800;
+    font-style:italic;
+
+    background:
+        linear-gradient(
+            105deg,
+            #ffdc91,
+            #fff6d8,
+            #dba9ff,
+            #ffe19e
+        );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+
+    filter:
+        drop-shadow(0 4px 12px rgba(0,0,0,.70))
+        drop-shadow(0 0 15px rgba(255,205,125,.30))
+        drop-shadow(0 0 25px rgba(178,91,255,.24));
+}
+
+.loading-status{
+
+    min-height:34px;
+
+    margin:0 0 20px;
+
+    color:rgba(241,220,255,.94);
+
+    font-family:
+        "BaninDream",
+        "Vazirmatn",
+        sans-serif;
+
+    font-size:16px;
+    line-height:2;
+
+    direction:rtl;
+
+    text-shadow:
+        0 0 11px rgba(182,93,255,.28);
+
+    transition:
+        opacity .28s ease,
+        transform .28s ease;
+}
+
+.loading-progress-track{
+
+    position:relative;
+
+    width:min(390px, 88%);
+    height:9px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,222,154,.20);
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,.52),
+        0 0 15px rgba(172,86,255,.10);
+}
+
+.loading-progress-bar{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:0%;
+    height:100%;
+
+    overflow:hidden;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8055d9,
+            #d88be7,
+            #ffe099,
+            #fff2c4
+        );
+
+    box-shadow:
+        0 0 12px rgba(255,211,130,.52),
+        0 0 19px rgba(185,95,255,.35);
+
+    transition:
+        width .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.loading-progress-bar::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-3px;
+    bottom:-3px;
+
+    width:45px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.78),
+            transparent
+        );
+
+    animation:
+        universeLoadingShimmer
+        1.9s
+        linear
+        infinite;
+}
+
+.loading-percentage{
+
+    margin-top:10px;
+
+    color:rgba(255,225,170,.88);
+
+    font-family:
+        "BaninDream",
+        Georgia,
+        serif;
+
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:2px;
+
+    text-shadow:
+        0 0 10px rgba(255,204,123,.28);
+}
+
+.enter-universe-button{
+
+    width:min(310px, 90%);
+    min-height:54px;
+
+    margin-top:23px;
+    padding:10px 25px;
+
+    border-radius:14px !important;
+
+    color:rgba(255,245,222,.98);
+
+    font-family:
+        "BaninDream",
+        "Vazirmatn",
+        sans-serif;
+
+    font-size:18px;
+    font-weight:800;
+
+    direction:rtl;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(123,68,190,.98),
+            rgba(85,46,153,.98),
+            rgba(177,100,202,.96)
+        ) !important;
+
+    border:
+        1px solid rgba(255,225,163,.42) !important;
+
+    box-shadow:
+        0 13px 34px rgba(0,0,0,.40),
+        0 0 22px rgba(178,87,255,.25);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:translateY(12px) scale(.96);
+
+    cursor:pointer;
+
+    transition:
+        opacity .45s ease,
+        visibility .45s ease,
+        transform .45s ease,
+        filter .25s ease;
+
+}
+
+#loadingScreen.loading-ready
+.enter-universe-button{
+
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transform:translateY(0) scale(1);
+
+    animation:
+        universeEnterPulse
+        2.6s
+        ease-in-out
+        infinite;
+}
+
+.enter-universe-button:hover{
+
+    filter:brightness(1.15);
+
+    transform:
+        translateY(-2px)
+        scale(1.025) !important;
+}
+
+#loadingScreen.loading-ready
+.loading-progress-track,
+
+#loadingScreen.loading-ready
+.loading-percentage{
+
+    opacity:.56;
+}
+
+@media (max-width:600px){
+
+    .universe-loader{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .loading-moon-wrap{
+        width:180px;
+        height:180px;
+    }
+
+    .loading-moon{
+        width:150px;
+        height:150px;
+    }
+
+    .loading-moon-fill::before{
+        width:150px;
+        height:150px;
+    }
+
+}
+/*==================================================
+LOCK WORLD INTERACTIONS DURING LOADING
+==================================================*/
+
+body.universe-loading-active #app{
+
+    pointer-events:none !important;
+
+}
+
+body.universe-loading-active
+#miladSignatureContainer,
+
+body.universe-loading-active
+#baninUniverseLogoContainer{
+
+    opacity:0 !important;
+
+    visibility:hidden !important;
+
+    pointer-events:none !important;
+
+}
+
+body.universe-loading-active
+#miladSignatureContainer *,
+
+body.universe-loading-active
+#baninUniverseLogoContainer *{
+
+    pointer-events:none !important;
+
+}
