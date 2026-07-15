@@ -216,43 +216,123 @@ const WorldLoader = {
 
     },
 
-    loadImage(src){
+loadImage(src){
 
-        return new Promise(
-            resolve => {
+    return new Promise(
+        resolve => {
 
-                const image =
-                    new Image();
+            const image =
+                new Image();
+
+            let finished =
+                false;
+
+            let timeoutId =
+                null;
+
+
+            const finish = (
+                result,
+                reason = ""
+            ) => {
+
+                if(finished){
+                    return;
+                }
+
+                finished =
+                    true;
+
+                if(timeoutId !== null){
+
+                    window.clearTimeout(
+                        timeoutId
+                    );
+
+                }
 
                 image.onload =
-                    () => {
-
-                        this.assets[src] =
-                            image;
-
-                        resolve(image);
-
-                    };
+                    null;
 
                 image.onerror =
+                    null;
+
+
+                if(result){
+
+                    this.assets[src] =
+                        result;
+
+                }
+
+
+                if(reason){
+
+                    console.warn(
+                        "⚠️ Image loading skipped:",
+                        src,
+                        reason
+                    );
+
+                }
+
+
+                resolve(
+                    result
+                );
+
+            };
+
+
+            image.onload =
+                () => {
+
+                    finish(
+                        image
+                    );
+
+                };
+
+
+            image.onerror =
+                () => {
+
+                    finish(
+                        null,
+                        "load error"
+                    );
+
+                };
+
+
+            /*
+                Prevent a slow or blocked network request
+                from freezing the entire loading screen.
+            */
+            timeoutId =
+                window.setTimeout(
                     () => {
 
-                        console.warn(
-                            "⚠️ Image not found:",
-                            src
+                        finish(
+                            null,
+                            "25 second timeout"
                         );
 
-                        resolve(null);
+                    },
+                    25000
+                );
 
-                    };
 
-                image.src =
-                    src;
+            image.decoding =
+                "async";
 
-            }
-        );
+            image.src =
+                src;
 
-    },
+        }
+    );
+
+},
 
     loadAudio(src){
 
